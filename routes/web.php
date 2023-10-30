@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GroupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ Route::get('/', function () {
 
 
 
-Route::post('/register', [AuthController::class, 'register']);
+// Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -47,3 +48,13 @@ Route::put('/contacts/{contact}', [ContactController::class, 'update'])->name('c
 
 // Delete a contact
 Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
+
+Route::get('/groups', [GroupController::class, 'index']); // Get all groups
+
+Route::get('/groups/{group}', [GroupController::class, 'show']); // Get a specific group
+
+Route::post('/groups', [GroupController::class, 'store']); // Create a new group
+
+Route::put('/groups/{group}', [GroupController::class, 'update']); // Update a group
+
+Route::delete('/groups/{group}', [GroupController::class, 'destroy']);
