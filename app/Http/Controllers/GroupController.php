@@ -9,7 +9,9 @@ class GroupController extends Controller
 {
     public function index()
     {
-        $groups = Group::all();
+        // $groups = Group::all();
+        // return response()->json($groups);
+        $groups = Group::with('contacts')->get();
         return response()->json($groups);
     }
 
@@ -17,11 +19,15 @@ class GroupController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'contacts' => 'array',
         ]);
 
         $group = new Group([
             'name' => $request->input('name'),
+            'user_id' => auth()->user()->id,
         ]);
+
+    
 
         $group->user_id = auth()->user()->id; // Set the user ID for the group.
 
